@@ -1,101 +1,51 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import WeeksDays from './Weeks';
+import { getDaysFuncion } from '../../redux/callendarSlice';
+import { AppDispatch } from '../../redux/store';
 
 const Caledar = () => {
-  const months: string[] = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  const date: Date = new Date();
+  const month = useSelector((state: RootState) => state.callendar.month);
+  const yearOnScreen = useSelector((state: RootState) => state.callendar.yearOnScreen);
+  const staticDays = useSelector((state: RootState) => state.callendar.staticDays);
+  const daysInTheMonth = useSelector((state: RootState) => state.callendar.daysInTheMonth);
+  const currentMonth = useSelector((state: RootState) => state.callendar.currentMonth);
+  const store = useSelector((state: RootState) => state.callendar);
+  // console.log('store:', store);
 
-  // array of days
-  let daysInTheMonth: number[] = [];
-  const [yearOnScreen, setyearOnScreen] = useState<number>(date.getFullYear());
-  const [currentMonth, setcurrentMonth] = useState<number>(date.getMonth());
-  const [daysOnScreen, setDaysOnScreen] = useState<number[]>(daysInTheMonth);
-  const [month, setMonth] = useState<string>(months[currentMonth]);
-  // function get days in a month number
+  const dispatch = useDispatch();
 
-  const getDaysFuncion = (nr: number) => {
-    const getDaysInMonth = (year: number, month: number) => {
-      return new Date(year, month + 1, 0).getDate();
-    };
-
-    let getCurrentDaysInMonth = getDaysInMonth(yearOnScreen, currentMonth + nr);
-    for (let i = 0; i < getCurrentDaysInMonth; i++) {
-      daysInTheMonth.push(i + 1);
-    }
-    return setDaysOnScreen([...daysInTheMonth]);
-  };
-
-  // add month
-  const monthPlus = () => {
-    let addOneMonth = 1;
-    getDaysFuncion(addOneMonth);
-    return setcurrentMonth((prev) => {
-      if (prev === 11) {
-        setyearOnScreen((prev) => prev + 1);
-        return 0;
-      }
-
-      return prev + 1;
-    });
-  };
-
-  // minus month
-  const monthMinus = () => {
-    let minusOneMOnth = -1;
-    getDaysFuncion(minusOneMOnth);
-
-    return setcurrentMonth((prev) => {
-      if (prev === 0) {
-        setyearOnScreen((prev) => prev - 1);
-        return 11;
-      }
-      return prev - 1;
-    });
-  };
-
-  // update current month
-  useEffect(() => {
-    setMonth(months[currentMonth]);
-  }, [currentMonth]);
 
   useEffect(() => {
-    let dontNeedToAddAnyMonth = 0;
-    if (daysOnScreen.length === 0) {
-      getDaysFuncion(dontNeedToAddAnyMonth);
-    }
+    dispatch(getDaysFuncion({ yearOnScreen, currentMonth }));
   }, []);
 
   return (
     <div>
       <h1>Awesome calendar</h1>
       <div className='flex-space'>
-        <button style={{ width: '5rem' }} onClick={monthMinus}>
-          {'<'}
-        </button>
+        <button style={{ width: '5rem' }}>{'<'}</button>
         <h2>
           {yearOnScreen} {month}
         </h2>
-        <button style={{ width: '5rem' }} onClick={monthPlus}>
-          {'>'}
-        </button>
+        <button style={{ width: '5rem' }}>{'>'}</button>
       </div>
-      <ul>
-        {daysOnScreen.map((day, i) => {
-          return <li key={i}>{day}</li>;
+      <div className='cointainer'>
+        <WeeksDays staticDays={staticDays} />
+        {/* { emtyDaysDisplay.map((day, i) => (
+          <span key={i} className='day gray'></span>
+        ))} */}
+        {daysInTheMonth.map((day) => {
+          return (
+            <span className='day' key={day.id}>
+              {day.day}
+            </span>
+          );
         })}
-      </ul>
+        {/* <span className='day gray'></span>
+        <span className='day gray'></span> */}
+      </div>
     </div>
   );
 };

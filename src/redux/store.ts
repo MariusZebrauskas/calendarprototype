@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import updateSlice from './updateSlice';
+import callendar from "./callendarSlice"
 
 export const store = configureStore({
   reducer: {
     updateSlice: updateSlice,
+    callendar,
   },
 });
 

@@ -7,16 +7,78 @@
 .animationWithredux {
   color: yellow;
   font-size: 2rem;
+  -webkit-transition: all ease-in-out 1s;
   transition: all ease-in-out 1s;
 }
+
 .animationWitoutRedux {
   font-size: 1rem;
   color: darkblue;
+  -webkit-transition: all ease-in-out 1s;
   transition: all ease-in-out 1s;
 }
 
 .flex-space {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
+
+.ul {
+  text-decoration: none;
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.cointainer {
+  /* background-color: green; */
+  height: 30rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+  -ms-grid-rows: (1fr)[7];
+      grid-template-rows: repeat(7, 1fr);
+}
+
+.day {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+}
+
+.day:hover {
+  background-color: red;
+  color: black;
+  cursor: pointer;
+}
+
+.gray {
+  color: #433939;
+}
+
+.gray:hover {
+  background-color: inherit;
+  cursor: default;
+}
+/*# sourceMappingURL=App.css.map */

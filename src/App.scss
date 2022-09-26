@@ -1,0 +1,58 @@
+.App {
+  text-align: center;
+  background-color: gray;
+  color: blue;
+}
+
+.animationWithredux {
+  color: yellow;
+  font-size: 2rem;
+  transition: all ease-in-out 1s;
+}
+.animationWitoutRedux {
+  font-size: 1rem;
+  color: darkblue;
+  transition: all ease-in-out 1s;
+}
+
+.flex-space {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.ul {
+  text-decoration: none;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.cointainer {
+  /* background-color: green; */
+  height: 30rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+}
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  &:hover {
+    background-color: red;
+    color: black;
+    cursor: pointer;
+  }
+}
+
+.gray {
+  color: rgb(67, 57, 57);
+  &:hover {
+    background-color: inherit;
+    cursor:default;
+  }
+}
